@@ -54,8 +54,10 @@ app.post("/api/process", (req, res) => {
   res.json({
     success: true,
     message: "Public media URL accepted",
-    url: parsedUrl.href,
-    status: "ready"
+    status: "ready",
+    sourceUrl: parsedUrl.href,
+    downloadUrl: null,
+    note: "Connect an authorized media processor to generate the download URL."
   });
 });
 
