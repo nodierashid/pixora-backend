@@ -33,10 +33,29 @@ app.post("/api/process", (req, res) => {
     });
   }
 
+  let parsedUrl;
+
+  try {
+    parsedUrl = new URL(url);
+  } catch {
+    return res.status(400).json({
+      success: false,
+      message: "Invalid URL"
+    });
+  }
+
+  if (!["http:", "https:"].includes(parsedUrl.protocol)) {
+    return res.status(400).json({
+      success: false,
+      message: "Only HTTP and HTTPS URLs are supported"
+    });
+  }
+
   res.json({
     success: true,
-    message: "URL received successfully",
-    url: url
+    message: "Public media URL accepted",
+    url: parsedUrl.href,
+    status: "ready"
   });
 });
 
