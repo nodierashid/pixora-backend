@@ -23,7 +23,7 @@ app.get("/api/status", (req, res) => {
   });
 });
 
-app.post("/api/process", (req, res) => {
+app.post("/api/process", async (req, res) => {
   const { url } = req.body;
 
   if (!url) {
@@ -56,8 +56,8 @@ app.post("/api/process", (req, res) => {
     message: "Public media URL accepted",
     status: "ready",
     sourceUrl: parsedUrl.href,
-    downloadUrl: null,
-    note: "Connect an authorized media processor to generate the download URL."
+    downloadUrl: parsedUrl.href,
+    note: "Direct download is available only when the supplied URL permits authorized access."
   });
 });
 
